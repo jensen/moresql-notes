@@ -35,9 +35,9 @@ The students and cohorts tables have the following schema:
 |    | email      |   |    | start_date |
 |    | phone      |   |    | end_date   |
 |    | github     |   +-----------------+
-|    | start_date |  
-|    | end_date   |   
-| FK | cohort_id  |   
+|    | start_date |
+|    | end_date   |
+| FK | cohort_id  |
 +-----------------+
 ```
 
@@ -121,7 +121,7 @@ If we remove the comments then we've essentially written the same code in a diff
 
 ### Complex Example
 
-There are 12 cohorts and 72725 assignment_submissions. We will change the requirements slightly. Now we want to get a list of students and the number of assignments they have each submitted. 
+There are 12 cohorts and 72725 assignment_submissions. We will change the requirements slightly. Now we want to get a list of students and the number of assignments they have each submitted.
 
 __Basic Query w/ Join in JavaScript__
 
@@ -138,7 +138,7 @@ const result = input.students.map(student => {
   /* SELECT
      students.id,
      students.name,
-     count(assignment_submissions.id) AS assignments_complete 
+     count(assignment_submissions.id) AS assignments_complete
   */
   return {
     id: student.id,
@@ -205,7 +205,7 @@ SQL Query : 41ms
 
 The queries that I find the most interesting are the ones that allow us to make sense of our data in ways that are not immediately obvious. We could continue the process of writing JavaScript to do tasks that SQL is better at. My prediction is that every time the JavaScript solution will be slower. It's also likely it will take longer to write and debug.
 
-Here are a number of scenarios to think about. 
+Here are a number of scenarios to think about.
 
 - Find all inactive cohorts and identify how many assistance requests were made per student on average.
 - Find all the students who are currently active and display the number of complete and the total assignments for the program.
@@ -357,7 +357,7 @@ HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments);
 
 > Query Time: 36ms
 
-This doesn't help us much. We need to be able to know at all times which students are being on their assignments. We need a different query for this. We need to know how many they have compeleted and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
+This doesn't help us much. We need to be able to know at all times which students are being on their assignments. We need a different query for this. We need to know how many they have completed and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
 
 ```sql
 SELECT
@@ -377,9 +377,9 @@ HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments WHE
 
 Because of the initial filter down to the small subset of students the second query runs faster. It also gives us better results.
 
-## Perfromance 
+## Perfromance
 
-These queries are starting to get pretty complex. It's important to notice the difference between these two queries. The difference is that one finds the data for all students and the second provides a specific student. The second query is much faster than the first. 
+These queries are starting to get pretty complex. It's important to notice the difference between these two queries. The difference is that one finds the data for all students and the second provides a specific student. The second query is much faster than the first.
 
 __SLOW__ (~ 1.7s)
 
@@ -414,13 +414,13 @@ FROM students
 WHERE students.id = 159;
 ```
 
-I could see both of these queries being useful. If you are an educator trying to determine which students are behind, then a view of all the students makes sense. This query likely wouldn't be run often so the speed is of less concern.
+I could see both of these queries being useful. If you are an educator trying to determine which students are behind on their assignments, then a view of all the students makes sense. This query likely wouldn't be run often so the speed is of less concern.
 
 The second query also returns the students id and name which is useful for the first query. I would likely revert to using the query from Scenario Seven to achieve the same goal. We really just need a list of incomplete assignments and we already know which student we are targeting.
 
 ## Final Thoughts
 
-Learning this language in a single day is overwhelming. My recommendation is to not worry about the speed of your queries during this week. Learn the language and focus on understanding how to compose queries with the different clauses. 
+Learning this language in a single day is overwhelming. My recommendation is to not worry about the speed of your queries during this week. Learn the language and focus on understanding how to compose queries with the different clauses.
 
 Once you have learned the language any discussion on performance will make more sense. There are many ways to compose a query to get the same results. Some are faster than others.
 
@@ -428,6 +428,6 @@ When searching for queries on stack overflow don't be content just copying and p
 
 ## Bonus
 
-In a couple of the above examples we use the array_agg function which is not officially supported by most database implementations. There are a lot of [aggregate](https://www.postgresql.org/docs/current/static/functions-aggregate.html) functions that can be used with PostgreSQL. 
+In a couple of the above examples we use the array_agg function which is not officially supported by most database implementations. There are a lot of [aggregate](https://www.postgresql.org/docs/current/static/functions-aggregate.html) functions that can be used with PostgreSQL.
 
-PostgreSQL supports the storage of JSON and Array data types. There are some situations where storing your data using these types makes sense. Don't over do it. 
+PostgreSQL supports the storage of JSON and Array data types. There are some situations where storing your data using these types makes sense. Don't over do it.
