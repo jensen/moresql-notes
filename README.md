@@ -1,4 +1,4 @@
-# Mo'Sql
+# Mo'SQL
 
 ## Objective
 
