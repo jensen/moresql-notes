@@ -377,7 +377,7 @@ HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments WHE
 
 Because of the initial filter down to the small subset of students the second query runs faster. It also gives us better results.
 
-## Perfromance
+## Performance
 
 These queries are starting to get pretty complex. It's important to notice the difference between these two queries. The difference is that one finds the data for all students and the second provides a specific student. The second query is much faster than the first.
 
