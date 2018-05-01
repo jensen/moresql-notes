@@ -316,7 +316,7 @@ FROM assistance_requests
 JOIN assignments
 ON assignments.id = assistance_requests.assignment_id
 GROUP BY assignments.id
-ORDER BY count(assistance_requests.id);
+ORDER BY count(assistance_requests.id) DESC;
 ```
 
 > Query Time: 16ms
