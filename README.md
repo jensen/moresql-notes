@@ -41,7 +41,7 @@ The students and cohorts tables have the following schema:
 +-----------------+
 ```
 
-In JavaScript we make the query using a JavaScript API for PostgreSQL called [node-postgres](https://github.com/brianc/node-postgres). The data is converted into arrays and objects.
+In JavaScript we make the query using a JavaScript API for PostgreSQL called [node-postgres](https://github.com/brianc/node-postgres). The data is converted into arrays of objects.
 
 ```javascript
 const students = [
@@ -71,7 +71,7 @@ const cohorts = [
 
 __Basic Query w/ Join in JavaScript__
 
-This code could be written a number of different ways. The pattern goes through each student and for each student it finds the cohort that the student belongs to. It attaches the cohort name to the final result object.
+This code could be written a number of different ways. Iterate through each student and for each student find the cohort that the student belongs to. Attach the cohort name to the final result object.
 
 ```javascript
 /* FROM students */
@@ -259,7 +259,7 @@ GROUP BY students.id;
 SELECT
   teachers.name,
   teachers.start_date,
-count(assistance_requests.id)
+  count(assistance_requests.id)
 FROM teachers
 JOIN assistance_requests
 ON assistance_requests.teacher_id = teachers.id
@@ -357,7 +357,7 @@ HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments);
 
 > Query Time: 36ms
 
-This doesn't help us much. We need to be able to know at all times which students are being on their assignments. We need a different query for this. We need to know how many they have completed and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
+This doesn't help us much. We need to be able to know at all times which students are falling behind on their assignments. We need a different query for this. We need to know how many they have completed and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
 
 ```sql
 SELECT
@@ -379,7 +379,7 @@ Because of the initial filter down to the small subset of students the second qu
 
 ## Performance
 
-These queries are starting to get pretty complex. It's important to notice the difference between these two queries. The difference is that one finds the data for all students and the second provides a specific student. The second query is much faster than the first.
+These queries are starting to get pretty complex. It's important to notice the difference between these two queries. One finds the data for all students and the second provides a specific student. The second query is much faster than the first.
 
 __SLOW__ (~ 1.7s)
 
