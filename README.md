@@ -359,7 +359,7 @@ HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments);
 
 > Query Time: 36ms
 
-This doesn't help us much. We need to be able to know at all times which students are being on their assignments. We need a different query for this. We need to know how many they have completed and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
+This doesn't help us much. We need to be able to know at all times which students are behind on their assignments. We need a different query for this. We need to know how many they have completed and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
 
 ```sql
 SELECT
