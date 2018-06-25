@@ -15,6 +15,8 @@ function sql() {
     JOIN cohorts ON cohorts.id = students.cohort_id
   `).then(result => {
     console.log(`SQL Query : ${new Date() - queryStart}ms`)
+
+    client.end()
   })
 }
 

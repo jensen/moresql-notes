@@ -14,6 +14,8 @@ function sql() {
     GROUP BY students.id
   `).then(result => {
     console.log(`SQL Query : ${new Date() - queryStart}ms`)
+
+    client.end()
   })
 }
 
@@ -30,7 +32,7 @@ function javascript(input) {
     /* SELECT
          students.id,
          students.name,
-         count(assignment_submissions.id) as assignments_complete 
+         count(assignment_submissions.id) as assignments_complete
     */
     return {
       id: student.id,
