@@ -340,44 +340,6 @@ ORDER BY assignments.id;
 
 > Query Time: 12ms
 
-## Making Good Decisions
-
-We could do a query to determine which students haven't finished all of their assignments. Then we would end up with a result set that contains those students who haven't even finished the program yet. We can filter out the students who finished the program to see which ones did not complete their assignments.
-
-```sql
-SELECT
-  students.id,
-  students.name,
-  count(assignment_submissions.id)
-FROM students
-JOIN assignment_submissions
-ON assignment_submissions.student_id = students.id
-WHERE students.end_date IS NOT NULL
-GROUP BY students.id
-HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments);
-```
-
-> Query Time: 36ms
-
-This doesn't help us much. We need to be able to know at all times which students are behind on their assignments. We need a different query for this. We need to know how many they have completed and how many they should have completed by that day. We need to do some interesting math with dates to filter out any assignments that are in the future.
-
-```sql
-SELECT
-  students.cohort_id AS cohort_id,
-  students.name,
-  count(assignment_submissions.id),
-  (SELECT count(id) FROM assignments WHERE day < DATE_PART('day', '2019-01-01'::timestamp - students.start_date::timestamp))
-FROM students
-JOIN assignment_submissions
-ON assignment_submissions.student_id = students.id
-WHERE students.end_date IS NULL
-GROUP BY students.id
-HAVING count(assignment_submissions.id) < (SELECT count(id) FROM assignments WHERE day < DATE_PART('day', '2019-01-01'::timestamp - students.start_date::timestamp));
-```
-
-> Query Time: 26ms
-
-Because of the initial filter down to the small subset of students the second query runs faster. It also gives us better results.
 
 ## Performance
 
