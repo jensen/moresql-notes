@@ -8,8 +8,6 @@ Today I was given the chance to convince you that the SQL language is worth lear
 
 It is likely one person in the group will take responsibility for writing the database queries. I've noticed that this person gains a slight advantage. Everyone spends a week writing the same JavaScript, Express Servers and HTML/CSS. Roughly one in three spends a week writing SQL.
 
-Tomorrow you will learn about an abstraction over SQL called Knex. This will allow you to write queries with a JavaScript interface. You are building the queries that you would write in SQL. This is different than Rails week when you will use a library which provides a different way to interact with rows in a database.
-
 The only way that you will be able to take advantage of the benefits of SQL is if you make the decision for yourself. It is someting you want to gain 'above adequate' competency with.
 
 ## You vs. Database
