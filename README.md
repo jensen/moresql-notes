@@ -6,7 +6,7 @@ Slides and notes available at [https://github.com/jensen/moresql-notes/](https:/
 
 Today I was given the chance to convince you that the SQL language is worth learning. We only spend some time on the weekend, today and tomorrow working through exercises. Wednesday you will work in groups to plan your midterm project.
 
-It is likely one person in the group will take responsibility for writing the database queries. I've noticed that this person gains a slight advantage. Everyone spends a week writing the same JavaScript, Express Servers and HTML/CSS. Roughly one in three spends a week writing SQL.
+It is likely one person in the group will take responsibility for writing the database queries. I've noticed that this person gains a slight advantage. Everyone spends a week writing the same JavaScript, Express Servers and HTML/CSS. Roughly one in three spends an extra week writing SQL.
 
 The only way that you will be able to take advantage of the benefits of SQL is if you make the decision for yourself. It is someting you want to gain 'above adequate' competency with.
 
