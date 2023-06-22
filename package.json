@@ -9,6 +9,6 @@
   "author": "Karl Jensen",
   "license": "MIT",
   "dependencies": {
-    "pg": "^7.4.1"
+    "pg": "^8.11.0"
   }
 }
